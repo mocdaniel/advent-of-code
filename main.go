@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/mocdaniel/advent-of-code/day01"
 	"github.com/mocdaniel/advent-of-code/day02"
+	"github.com/mocdaniel/advent-of-code/day03"
 	"github.com/urfave/cli/v2"
 )
 
@@ -53,6 +55,40 @@ func main() {
 
 					fmt.Printf("The total score according to the strategy guide would be %v\n", result1)
 					fmt.Printf("The total score according to the decrypted strategy guide would be %v\n", result2)
+					return nil
+				},
+			},
+			{
+				Name:    "day03",
+				Aliases: []string{"3"},
+				Action: func(cCtx *cli.Context) error {
+
+					input, err := os.ReadFile(cCtx.Args().First())
+					if err != nil {
+						return err
+					}
+
+					inputStrings := strings.Split(strings.TrimSuffix(string(input), "\n"), "\n")
+					result1 := 0
+
+					for _, p := range inputStrings {
+						result1 += day03.GetPriority(day03.FindDuplicatedItem(p))
+					}
+
+					result2 := 0
+					tempStrings := make([]string, 0)
+
+					for i, p := range inputStrings {
+						tempStrings = append(tempStrings, p)
+
+						if i%3 == 2 {
+							result2 += day03.GetPriority(day03.FindGroupPriority(tempStrings))
+							tempStrings = tempStrings[:0]
+						}
+					}
+
+					fmt.Printf("The total priority score of all misplaced items is %v\n", result1)
+					fmt.Printf("The total priority of group identifiers is %v\n", result2)
 					return nil
 				},
 			},
