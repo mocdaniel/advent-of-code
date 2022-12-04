@@ -9,6 +9,7 @@ import (
 	"github.com/mocdaniel/advent-of-code/day01"
 	"github.com/mocdaniel/advent-of-code/day02"
 	"github.com/mocdaniel/advent-of-code/day03"
+	"github.com/mocdaniel/advent-of-code/day04"
 	"github.com/urfave/cli/v2"
 )
 
@@ -89,6 +90,44 @@ func main() {
 
 					fmt.Printf("The total priority score of all misplaced items is %v\n", result1)
 					fmt.Printf("The total priority of group identifiers is %v\n", result2)
+					return nil
+				},
+			},
+			{
+				Name:    "day04",
+				Aliases: []string{"4"},
+				Action: func(cCtx *cli.Context) error {
+
+					input, err := os.ReadFile(cCtx.Args().First())
+					if err != nil {
+						return err
+					}
+
+					inputStrings := strings.Split(strings.TrimSuffix(string(input), "\n"), "\n")
+					result1 := 0
+					result2 := 0
+
+					for _, i := range inputStrings {
+						total_overlapping, err := day04.DetectOverlap(i, true)
+						if err != nil {
+							return err
+						}
+						if total_overlapping {
+							result1 += 1
+						}
+
+						overlapping, err := day04.DetectOverlap(i, false)
+						if err != nil {
+							return err
+						}
+						if overlapping {
+							result2 += 1
+						}
+
+					}
+
+					fmt.Printf("The amount of entirely overlapping section pairs is %v\n", result1)
+					fmt.Printf("The amount of overlapping section pairs is %v\n", result2)
 					return nil
 				},
 			},
