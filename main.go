@@ -10,6 +10,7 @@ import (
 	"github.com/mocdaniel/advent-of-code/day02"
 	"github.com/mocdaniel/advent-of-code/day03"
 	"github.com/mocdaniel/advent-of-code/day04"
+	"github.com/mocdaniel/advent-of-code/day05"
 	"github.com/urfave/cli/v2"
 )
 
@@ -128,6 +129,31 @@ func main() {
 
 					fmt.Printf("The amount of entirely overlapping section pairs is %v\n", result1)
 					fmt.Printf("The amount of overlapping section pairs is %v\n", result2)
+					return nil
+				},
+			},
+			{
+				Name:    "day05",
+				Aliases: []string{"5"},
+				Action: func(cCtx *cli.Context) error {
+
+					input, err := os.ReadFile(cCtx.Args().First())
+					if err != nil {
+						return err
+					}
+
+					result1, err := day05.ParseContainerStacks(string(input), false)
+					if err != nil {
+						return err
+					}
+
+					result2, err := day05.ParseContainerStacks(string(input), true)
+					if err != nil {
+						return err
+					}
+
+					fmt.Printf("The containers on top of each stack after operating with model 9000 spell %v\n", result1)
+					fmt.Printf("The containers on top of each stack after operating with model 9001 spell %v\n", result2)
 					return nil
 				},
 			},
