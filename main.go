@@ -11,6 +11,7 @@ import (
 	"github.com/mocdaniel/advent-of-code/day03"
 	"github.com/mocdaniel/advent-of-code/day04"
 	"github.com/mocdaniel/advent-of-code/day05"
+	"github.com/mocdaniel/advent-of-code/day06"
 	"github.com/urfave/cli/v2"
 )
 
@@ -124,7 +125,6 @@ func main() {
 						if overlapping {
 							result2 += 1
 						}
-
 					}
 
 					fmt.Printf("The amount of entirely overlapping section pairs is %v\n", result1)
@@ -154,6 +154,25 @@ func main() {
 
 					fmt.Printf("The containers on top of each stack after operating with model 9000 spell %v\n", result1)
 					fmt.Printf("The containers on top of each stack after operating with model 9001 spell %v\n", result2)
+					return nil
+				},
+			},
+			{
+				Name:    "day06",
+				Aliases: []string{"6"},
+				Action: func(cCtx *cli.Context) error {
+
+					input, err := os.ReadFile(cCtx.Args().First())
+					if err != nil {
+						return err
+					}
+
+					inputString := string(input)
+					result1 := day06.GetStartOfSequence(inputString, 4)
+					result2 := day06.GetStartOfSequence(inputString, 14)
+
+					fmt.Printf("The number of characters needed to be processed before the first packet marker is %v\n", result1)
+					fmt.Printf("The number of characters needed to be processed before the first message marker is %v\n", result2)
 					return nil
 				},
 			},
