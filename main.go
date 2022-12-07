@@ -188,11 +188,14 @@ func main() {
 					}
 
 					inputString := strings.Split(strings.TrimSuffix(string(input), "\n"), "\n")
-					ret := day07.BuildFileSystemTree(inputString)
-					if ret < 0 {
-						fmt.Println("The program encountered an error while building the file system.")
-						return nil
-					}
+					tree := day07.BuildFileSystemTree(inputString)
+
+					result1 := tree.GetSizeBelowNumber(100000)
+					fmt.Printf("The total size of all directories smaller than 100000 units is %v\n", result1)
+
+					result2 := tree.GetSize()
+					tree.GetSmallestAbove(30000000-(70000000-tree.GetSize()), &result2)
+					fmt.Printf("The total size of the smallest directory needed to be cleaned is %v\n", result2)
 
 					return nil
 				},
