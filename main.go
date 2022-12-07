@@ -12,6 +12,7 @@ import (
 	"github.com/mocdaniel/advent-of-code/day04"
 	"github.com/mocdaniel/advent-of-code/day05"
 	"github.com/mocdaniel/advent-of-code/day06"
+	"github.com/mocdaniel/advent-of-code/day07"
 	"github.com/urfave/cli/v2"
 )
 
@@ -173,6 +174,26 @@ func main() {
 
 					fmt.Printf("The number of characters needed to be processed before the first packet marker is %v\n", result1)
 					fmt.Printf("The number of characters needed to be processed before the first message marker is %v\n", result2)
+					return nil
+				},
+			},
+			{
+				Name:    "day07",
+				Aliases: []string{"7"},
+				Action: func(cCtx *cli.Context) error {
+
+					input, err := os.ReadFile(cCtx.Args().First())
+					if err != nil {
+						return err
+					}
+
+					inputString := strings.Split(strings.TrimSuffix(string(input), "\n"), "\n")
+					ret := day07.BuildFileSystemTree(inputString)
+					if ret < 0 {
+						fmt.Println("The program encountered an error while building the file system.")
+						return nil
+					}
+
 					return nil
 				},
 			},
