@@ -13,6 +13,7 @@ import (
 	"github.com/mocdaniel/advent-of-code/day05"
 	"github.com/mocdaniel/advent-of-code/day06"
 	"github.com/mocdaniel/advent-of-code/day07"
+	"github.com/mocdaniel/advent-of-code/day08"
 	"github.com/urfave/cli/v2"
 )
 
@@ -196,6 +197,30 @@ func main() {
 					result2 := tree.GetSize()
 					tree.GetSmallestAbove(30000000-(70000000-tree.GetSize()), &result2)
 					fmt.Printf("The total size of the smallest directory needed to be cleaned is %v\n", result2)
+
+					return nil
+				},
+			},
+			{
+				Name:    "day08",
+				Aliases: []string{"8"},
+				Action: func(cCtx *cli.Context) error {
+
+					input, err := os.ReadFile(cCtx.Args().First())
+					if err != nil {
+						return err
+					}
+
+					grid, err := day08.ParseGrid(string(input))
+					if err != nil {
+						return err
+					}
+
+					result1 := day08.CountTrees(grid)
+					result2 := day08.HighestScenicScore(grid)
+
+					fmt.Printf("The amount of trees visible from outside the grid is %v\n", result1)
+					fmt.Printf("The highest possible scenic score is %v\n", result2)
 
 					return nil
 				},
