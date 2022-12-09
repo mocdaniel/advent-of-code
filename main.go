@@ -14,6 +14,7 @@ import (
 	"github.com/mocdaniel/advent-of-code/day06"
 	"github.com/mocdaniel/advent-of-code/day07"
 	"github.com/mocdaniel/advent-of-code/day08"
+	"github.com/mocdaniel/advent-of-code/day09"
 	"github.com/urfave/cli/v2"
 )
 
@@ -221,6 +222,32 @@ func main() {
 
 					fmt.Printf("The amount of trees visible from outside the grid is %v\n", result1)
 					fmt.Printf("The highest possible scenic score is %v\n", result2)
+
+					return nil
+				},
+			},
+			{
+				Name:    "day09",
+				Aliases: []string{"9"},
+				Action: func(cCtx *cli.Context) error {
+
+					input, err := os.ReadFile(cCtx.Args().First())
+					if err != nil {
+						return err
+					}
+
+					result1, err := day09.GetVisitedPositions(string(input), 2)
+					if err != nil {
+						return err
+					}
+
+					result2, err := day09.GetVisitedPositions(string(input), 10)
+					if err != nil {
+						return err
+					}
+
+					fmt.Printf("The amount of unique positions visited by the tail of a short rope within the grid is %v\n", result1)
+					fmt.Printf("The amount of unique positions visited by the tail of a long rope within the grid is %v\n", result2)
 
 					return nil
 				},
