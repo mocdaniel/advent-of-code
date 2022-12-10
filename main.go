@@ -15,6 +15,7 @@ import (
 	"github.com/mocdaniel/advent-of-code/day07"
 	"github.com/mocdaniel/advent-of-code/day08"
 	"github.com/mocdaniel/advent-of-code/day09"
+	"github.com/mocdaniel/advent-of-code/day10"
 	"github.com/urfave/cli/v2"
 )
 
@@ -249,6 +250,37 @@ func main() {
 					fmt.Printf("The amount of unique positions visited by the tail of a short rope within the grid is %v\n", result1)
 					fmt.Printf("The amount of unique positions visited by the tail of a long rope within the grid is %v\n", result2)
 
+					return nil
+				},
+			},
+			{
+				Name:    "day10",
+				Aliases: []string{"10"},
+				Action: func(cCtx *cli.Context) error {
+
+					input, err := os.ReadFile(cCtx.Args().First())
+					if err != nil {
+						return err
+					}
+
+					instructions := strings.Split(strings.TrimSuffix(string(input), "\n"), "\n")
+
+					cycles := []int{20, 60, 100, 140, 180, 220}
+					result1 := 0
+					for _, c := range cycles {
+						s, err := day10.GetSignalStrength(instructions, c, false)
+						if err != nil {
+							return err
+						}
+						result1 += s
+					}
+
+					fmt.Printf("The added signal strength of the requested cycles is %v\n", result1)
+
+					_, err = day10.GetSignalStrength(instructions, -1, true)
+					if err != nil {
+						return err
+					}
 					return nil
 				},
 			},
